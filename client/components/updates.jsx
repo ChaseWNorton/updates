@@ -3,6 +3,7 @@ import TimelineLeft from './timelineLeft.jsx';
 import TimelineRight from './timelineRight.jsx';
 import Founded from './timelineFounded.jsx';
 import BlogPost from './blogPost.jsx';
+import Radium from 'radium';
 
 
 class Updates extends React.Component {
@@ -21,7 +22,7 @@ class Updates extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/${this.state.id}`)
+    fetch(`http://localhost:3003/api/${this.state.id}`)
       .then(res => res.json())
       .then(body => {
         this.setState({
@@ -37,7 +38,7 @@ class Updates extends React.Component {
   }
 
   timelineClick (id) {
-    fetch(`/blogs/${id}`)
+    fetch(`http://localhost:3003/blogs/${id}`)
       .then(res => res.json())
       .then(body => {
         console.log(body);
@@ -52,7 +53,7 @@ class Updates extends React.Component {
 
     return(
       this.state.display === 'home' ?
-      <div className="update-container" >
+      <div className="update-container" style={styles.update_container}>
         {this.state.posts.map(ele => {
             if (ele.postId % 2 === 0) {
               return <TimelineLeft
@@ -79,12 +80,44 @@ class Updates extends React.Component {
             }
         })}
           <Founded foundedDate={this.state.foundedDate} />
+        <div className='center-line' style={styles.centerLine}></div>
       </div>
+
       :
         <BlogPost numOfPosts={this.state.numOfPosts} post={this.state.post} />
     )
   }
 }
+
+let styles = {
+  "update_container": {
+    "display": "flex",
+    "position": "relative",
+    "WebkitBoxOrient": "vertical",
+    "WebkitBoxDirection": "normal",
+    "MsFlexDirection": "column",
+    "flexDirection": "column",
+    "WebkitBoxAlign": "center",
+    "MsFlexAlign": "center",
+    "alignItems": "center",
+    "MsFlexPack": "distribute",
+    "justifyContent": "space-around",
+    "backgroundColor": "white",
+    "color": "#282828",
+    "marginBottom": "15px"
+  },
+  centerLine: {
+    "position": "absolute",
+    "content": "''",
+    "height": "100%",
+    "backgroundColor": "#b1aba5",
+    "left": "50%",
+    "top": "0",
+    "width": "1px",
+    "overflow": "hidden",
+    "zIndex": "1"
+  }
+};
 
 
 export default Updates

@@ -1,6 +1,8 @@
 import React from 'react';
 import Radium from 'radium';
 var FontAwesome = require('react-fontawesome');
+require('font-awesome-webpack');
+
 
 class BlogPost extends React.Component {
   constructor(props) {
@@ -31,6 +33,7 @@ class BlogPost extends React.Component {
 
   onHoverTipIn() {
     this.setState({
+
       hover: true
     })
   }
@@ -58,7 +61,7 @@ class BlogPost extends React.Component {
         likes: this.state.likes + 1
     }, () => {
         try {
-          fetch(`/api/likePUT/${this.state.postId}`, {
+          fetch(`http://localhost:3003/api/likePUT/${this.state.postId}`, {
             body: JSON.stringify({likes: this.state.likes}),
             headers: {
               'content-type': 'application/json'
@@ -75,7 +78,7 @@ class BlogPost extends React.Component {
 
   prevClick() {
     let id = this.state.postId - 1
-    fetch(`/blogs/${id}`)
+    fetch(`http://localhost:3003/blogs/${id}`)
       .then(res => res.json())
       .then(body => {
           this.setState({
@@ -94,7 +97,7 @@ class BlogPost extends React.Component {
 
   nextClick() {
     let id = this.state.postId + 1
-    fetch(`/blogs/${id}`)
+    fetch(`http://localhost:3003/blogs/${id}`)
       .then(res => res.json())
       .then(body => {
         this.setState({

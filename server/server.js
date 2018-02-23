@@ -2,8 +2,11 @@ const express = require('express');
 const db = require('../database/db.js');
 const parser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
+
 
 const app = express();
+app.use(cors());
 app.use(parser.json());
 
 app.use(express.static('../dist'));
@@ -27,3 +30,4 @@ app.put(`/api/likePUT/:id`, function(req,res,next) {
 
 app.listen(3003);
 console.log('Listening on port 3003');
+
