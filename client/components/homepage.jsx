@@ -5,7 +5,7 @@ class Homepage extends React.Component {
     super(props);
     this.state = {
       canvasEle: '',
-      fillStyle: 'red',
+      canvasColor: 'red',
     };
     this.updateCanvas = this.updateCanvas.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -17,20 +17,26 @@ class Homepage extends React.Component {
 
   onClick() {
     this.setState({
-      fillStyle: 'blue',
+      canvasColor: 'blue',
     }, () => {this.updateCanvas(this.canvasEle)});
   }
 
   updateCanvas(node) {
-    const context = node.getContext('2d');
-    context.fillStyle = this.state.fillStyle;
-    context.fillRect(10, 10, 100, 50);
+    const cx = node.getContext('2d');
+    cx.beginPath();
+      cx.moveTo(1, 1);
+      cx.lineTo(1, 10000);
+    cx.stroke();
+    cx.beginPath();
+      cx.moveTo(1, 1);
+      cx.lineTo(20, 1);
+      cx.stroke();
   }
 
   render() {
     return(
       <div>
-        <canvas ref={canvas => this.canvasEle = canvas} onClick={this.onClick} width="1200" height="60"></canvas>
+        <canvas ref={canvas => this.canvasEle = canvas} onClick={this.onClick} height="10000"></canvas>
       </div>
 
     )
