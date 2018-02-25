@@ -24,13 +24,10 @@ class Homepage extends React.Component {
   updateCanvas(node) {
     const cx = node.getContext('2d');
     cx.beginPath();
-      cx.moveTo(1, 1);
-      cx.lineTo(1, 10000);
-    cx.stroke();
-    cx.beginPath();
-      cx.moveTo(1, 1);
-      cx.lineTo(20, 1);
-      cx.stroke();
+    cx.moveTo(50, 10);
+    cx.lineTo(10, 70);
+    cx.lineTo(90, 70);
+    cx.fill();
   }
 
   render() {
