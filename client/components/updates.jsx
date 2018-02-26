@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import TimelineLeft from './timelineLeft.jsx'
 
 @Radium
 class Homepage extends React.Component {
@@ -11,27 +12,14 @@ class Homepage extends React.Component {
       date: 'February 22',
       title: 'Week One Up',
       foundedDate:  'January 15th 2018',
-
-
     };
-    this.onClick = this.onClick.bind(this)
-  }
-
-
-  onClick() {
-    alert('Going to the new page!')
   }
 
   render() {
     return(
       <div className="update-container">
         <section className="timeline-container">
-          <div className="timeline-display-left">
-          <div className="timeline-left-line"></div>
-          <h4>{this.state.date}</h4>
-          <h1>{this.state.title}</h1>
-          <p>{this.state.blog}</p>
-        </div>
+          <TimelineLeft title={this.state.title} date={this.state.date} blog={this.state.blog} />
           <div className="timeline-display-right"></div>
         </section>
         <section className="timeline-container">
