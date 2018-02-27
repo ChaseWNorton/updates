@@ -1,0 +1,130 @@
+* {
+    border: 1px black solid
+}
+.update-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    color: #282828;
+    margin-bottom: 15px;
+}
+
+    .timeline-container {
+         display: flex;
+         flex-direction:  row;
+         align-items: center;
+         justify-content: space-between;
+         width: 80%;
+         padding: 15px;
+     }
+
+        .timeline-display-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 40%;
+            padding-right: 78px;
+            position: relative;
+            right: -30px;
+
+        }
+            .timeline-display-left > h1 {
+                margin-top: 2px;
+                margin-bottom: 0;
+            }
+
+            .timeline-display-left > h4 {
+                margin-top: 0px;
+            }
+
+            .timeline-display-left > p {
+                text-align: right;
+            }
+
+        .timeline-left-line {
+            content: '';
+            position: absolute;
+            right: 0;
+            height: 1px;
+            width: 60px;
+            background-color: #b1aba5;
+            top: 10px;
+        }
+
+
+
+        .timeline-display-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 200px;
+            padding-left: 78px;
+            position: relative;
+            left: -30px;
+        }
+            .timeline-right-line {
+                content: '';
+                position: absolute;
+                left: -60px;
+                height: 1px;
+                width: 60px;
+                background-color: #b1aba5;
+                top: 10px;
+
+            }
+
+                .timeline-display-right > h1 {
+                    margin-top: 2px;
+                    margin-bottom: 0;
+                }
+
+                .timeline-display-right > h4 {
+                    margin-top: 0px;
+                }
+
+                .timeline-display-right > p {
+                    text-align: left;
+                }
+
+        .line-holder{
+            display: flex;
+            position: relative;
+        }
+
+    .timeline-founded {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: 80%;
+        padding: 15px 15px 0 15px;
+    }
+
+        .founded {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 55%;
+            padding: 10px;
+            z-index: 2;
+            color: white;
+            background-color: darkslategrey
+        }
+
+    .update-container::after {
+        position: absolute;
+        content: '';
+        height: 100%;
+        background-color: #b1aba5;
+        left: 50%;
+        top: 0;
+        width: 1px;
+        overflow: hidden;
+        z-index: 1;
+    }
+
