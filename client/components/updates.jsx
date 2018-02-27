@@ -1,6 +1,8 @@
 import React from 'react';
 import Radium from 'radium';
-import TimelineLeft from './timelineLeft.jsx'
+import TimelineLeft from './timelineLeft.jsx';
+import TimelineRight from './timelineRight.jsx';
+import Founded from './timelineFounded.jsx';
 
 @Radium
 class Homepage extends React.Component {
@@ -18,36 +20,13 @@ class Homepage extends React.Component {
   render() {
     return(
       <div className="update-container">
-        <section className="timeline-container">
           <TimelineLeft title={this.state.title} date={this.state.date} blog={this.state.blog} />
-          <div className="timeline-display-right"></div>
-        </section>
-        <section className="timeline-container">
-          <div className="timeline-display-left"></div>
-          <div className="timeline-display-right">
-            <div className="timeline-right-line"></div>
-            <h4>{this.state.date}</h4>
-            <h1>{this.state.title}</h1>
-            <p>{this.state.blog}</p>
-          </div>
-        </section>
-        <section className="timeline-founded">
-          <div className="founded">
-            <h4>{this.state.foundedDate}</h4>
-            <h2>Project launched</h2>
-          </div>
-        </section>
+          <TimelineRight title={this.state.title} date={this.state.date} blog={this.state.blog} />
+          <Founded foundedDate={this.state.foundedDate} />
       </div>
     )
   }
 }
 
-var styles = {
-  base: {
-    ':after': {
-      content: 'Yo'
-    },
-  },
-};
 
 export default Homepage
