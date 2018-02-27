@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TimelineLeft = props => (
-  <section className="timeline-container-left">
+  <section className="timeline-container">
     <div className="timeline-display-left">
       <div className="timeline-left-line" />
         <h4>{props.date}</h4>
