@@ -22,6 +22,7 @@ class Homepage extends React.Component {
       <div className="update-container">
           <TimelineLeft title={this.state.title} date={this.state.date} blog={this.state.blog} />
           <TimelineRight title={this.state.title} date={this.state.date} blog={this.state.blog} />
+          <TimelineLeft title={this.state.title} date={this.state.date} blog={this.state.blog} />
           <Founded foundedDate={this.state.foundedDate} />
       </div>
     )
