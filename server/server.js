@@ -1,4 +1,6 @@
 const serve = require('koa-static-server');
+const mongoose = require('mongoose');
+
 const koa = require('koa');
 const app = new koa();
 
