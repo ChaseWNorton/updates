@@ -20,7 +20,6 @@ class Updates extends React.Component {
     fetch(`/api/${this.state.id}`)
       .then(res => res.json())
       .then(body => {
-        console.log(body);
         this.setState({
           posts: body.posts,
           foundedDate: body.founded

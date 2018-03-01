@@ -14,5 +14,5 @@ app.get('/api/:id', function(req,res,next) {
     .then(dbRes => res.send(dbRes));
 });
 
-app.listen(30034);
+app.listen(3003);
 console.log('Listening on port 3003');
