@@ -1,10 +1,18 @@
-const serve = require('koa-static-server');
-const mongoose = require('mongoose');
+const express = require('express');
+const db = require('../database/db.js');
+const parser = require('body-parser');
+const path = require('path');
 
-const koa = require('koa');
-const app = new koa();
 
-app.use(serve({rootDir: './dist'}));
+const app = express();
+app.use(parser.json());
 
-app.listen(3003);
-console.log('Listening on port 3000');
+app.use(express.static(path.join(__dirname, '../dist')));
+app.use('/:id', express.static(path.join(__dirname, '../dist')));
+app.get('/api/:id', function(req,res,next) {
+  db.findOne({projectId: req.params.id})
+    .then(dbRes => res.send(dbRes));
+});
+
+app.listen(30034);
+console.log('Listening on port 3003');
