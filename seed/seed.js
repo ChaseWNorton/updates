@@ -14,12 +14,14 @@ const post = mongoose.model('Post', postSchema);
 
 
 let fakeData = [];
+
 for (let i=0; i < 200; i++) {
   let project = {
     projectId: i,
     posts: [],
     founded: `${moment(fake.date.past()).format("MMMM Do, YYYY")}`,
   };
+
   for (let j=0; j< 4;j++ ) {
     const article = fake.lorem.paragraphs();
     const title = fake.lorem.words();
@@ -36,6 +38,7 @@ for (let i=0; i < 200; i++) {
       summary: summary,
       date: moment(fake.date.recent()).format("MMMM Do"),
       title: upperCaseTitle,
+      likes: 0
     });
   }
   fakeData.push(project)

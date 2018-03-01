@@ -16,7 +16,7 @@ class Updates extends React.Component {
     this.timelineClick = this.timelineClick.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     fetch(`/api/${this.state.id}`)
       .then(res => res.json())
       .then(body => {
@@ -24,7 +24,7 @@ class Updates extends React.Component {
           posts: body[0].posts,
           foundedDate: body[0].founded
         })
-      })
+    })
   }
 
   randomColor() {
