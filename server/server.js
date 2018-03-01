@@ -3,14 +3,13 @@ const db = require('../database/db.js');
 const parser = require('body-parser');
 const path = require('path');
 
-
 const app = express();
 app.use(parser.json());
 
-app.use(express.static(path.join(__dirname, '../dist')));
-app.use('/:id', express.static(path.join(__dirname, '../dist')));
+app.use(express.static('../dist'));
+app.use('/:id', express.static('../dist'));
 app.get('/api/:id', function(req,res,next) {
-  db.findOne({projectId: req.params.id})
+  db.find({projectId: req.params.id})
     .then(dbRes => res.send(dbRes));
 });
 

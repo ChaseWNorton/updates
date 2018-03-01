@@ -7,6 +7,6 @@ const Founded = props => (
       <h2>Project launched</h2>
     </div>
   </section>
-)
+);
 
 export default Founded;
