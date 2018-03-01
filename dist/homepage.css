@@ -1,17 +1,13 @@
 @font-face {
     font-family: 'Cooper Lt BT';
-    src: url('../client/fonts/CooperBT-Light.woff2') format('woff2'),
-    url('../client/fonts/CooperBT-Light.woff') format('woff'),
-    url('../client/fonts/CooperBT-Light.ttf') format('truetype');
+    src: url('../dist/fonts/CooperBT-Light.woff') format('woff');
     font-weight: 100;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Maison Neue';
-    src: url('../client/fonts/MaisonNeue-Book.woff2') format('woff2'),
-    url('../client/fonts/MaisonNeue-Book.woff') format('woff'),
-    url('../client/fonts/MaisonNeue-Book.ttf') format('truetype');
+    src: url('../dist/fonts/MaisonNeue-Book.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }

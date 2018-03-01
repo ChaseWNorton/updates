@@ -10,7 +10,8 @@ class Updates extends React.Component {
     this.state = {
       id: this.props.ID,
       posts: [],
-      foundedDate:  ''
+      foundedDate:  '',
+      color: ['#96C7FF', '#FFCBA9', '#05F2BA'],
     };
     this.timelineClick = this.timelineClick.bind(this);
   }
@@ -26,6 +27,10 @@ class Updates extends React.Component {
       })
   }
 
+  randomColor() {
+    return this.state.color[Math.floor(Math.random() * 3)];
+  }
+
   timelineClick () {
     alert('HEY!')
   }
@@ -35,9 +40,9 @@ class Updates extends React.Component {
       <div className="update-container">
         {this.state.posts.map(ele => {
             if (ele.postId % 2 === 0) {
-              return <TimelineLeft key={ele.postId} onClick={this.timelineClick} title={ele.title} date={ele.date} blog={ele.summary} />;
+              return <TimelineLeft key={ele.postId} onClick={this.timelineClick} background={this.randomColor()} title={ele.title} date={ele.date} blog={ele.summary} />;
             } else {
-              return <TimelineRight key={ele.postId} onClick={this.timelineClick} title={ele.title} date={ele.date} blog={ele.summary} />;
+              return <TimelineRight key={ele.postId} onClick={this.timelineClick} background={this.randomColor()} title={ele.title} date={ele.date} blog={ele.summary} />;
             }
         })}
           <Founded foundedDate={this.state.foundedDate} />
