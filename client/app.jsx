@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Homepage from './components/updates.jsx'
+import Updates from './components/updates.jsx'
 /*
 ReactDOM.render(
   <Homepage />, document.getElementById('app')
@@ -8,4 +8,4 @@ ReactDOM.render(
 */
 
 
-window.Homepage = Homepage;
+window.Updates = Updates;
