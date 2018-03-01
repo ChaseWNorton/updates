@@ -24,8 +24,8 @@ for (let i=0; i < 200; i++) {
     const article = fake.lorem.paragraphs();
     const title = fake.lorem.words();
     let summary;
-    if (article.split(' ').length > 50) {
-      summary = article.split(' ').slice(0, 51).join(' ');
+    if (article.split(' ').length > 28) {
+      summary = article.split(' ').slice(0, 28).join(' ');
     } else {
       summary = article;
     }

@@ -12,6 +12,7 @@ class Updates extends React.Component {
       posts: [],
       foundedDate:  ''
     };
+    this.timelineClick = this.timelineClick.bind(this);
   }
 
   componentWillMount() {
@@ -25,15 +26,18 @@ class Updates extends React.Component {
       })
   }
 
+  timelineClick () {
+    alert('HEY!')
+  }
 
   render() {
     return(
       <div className="update-container">
         {this.state.posts.map(ele => {
             if (ele.postId % 2 === 0) {
-              return <TimelineLeft key={ele.postId} title={ele.title} date={ele.date} blog={ele.summary} />;
+              return <TimelineLeft key={ele.postId} onClick={this.timelineClick} title={ele.title} date={ele.date} blog={ele.summary} />;
             } else {
-              return <TimelineRight key={ele.postId} title={ele.title} date={ele.date} blog={ele.summary} />;
+              return <TimelineRight key={ele.postId} onClick={this.timelineClick} title={ele.title} date={ele.date} blog={ele.summary} />;
             }
         })}
           <Founded foundedDate={this.state.foundedDate} />
