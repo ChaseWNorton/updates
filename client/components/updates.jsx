@@ -40,9 +40,9 @@ class Updates extends React.Component {
       <div className="update-container">
         {this.state.posts.map(ele => {
             if (ele.postId % 2 === 0) {
-              return <TimelineLeft key={ele.postId} onClick={this.timelineClick} background={this.randomColor()} title={ele.title} date={ele.date} blog={ele.summary} />;
+              return <TimelineLeft key={ele.postId} comments={ele.comments} likes={ele.likes} onClick={this.timelineClick} background={this.randomColor()} title={ele.title} date={ele.date} blog={ele.summary} />;
             } else {
-              return <TimelineRight key={ele.postId} onClick={this.timelineClick} background={this.randomColor()} title={ele.title} date={ele.date} blog={ele.summary} />;
+              return <TimelineRight key={ele.postId} comments={ele.comments} likes={ele.likes} onClick={this.timelineClick} background={this.randomColor()} title={ele.title} date={ele.date} blog={ele.summary} />;
             }
         })}
           <Founded foundedDate={this.state.foundedDate} />

@@ -18,7 +18,10 @@ const TimelineLeft = props => {
           <h4>{props.date}</h4>
           <h1 style={styles.base}>{props.title}</h1>
           <p>{props.blog}... <span className="read-more">Read More</span></p>
-          <div className="likes">{props.likes} likes</div>
+          <div className="info-container">
+            <div className="comments">{props.comments.length} comments</div>
+            <div className="likes">{props.likes} likes</div>
+          </div>
         </div>
       </div>
       <div className="timeline-display-right"/>

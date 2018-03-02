@@ -12,7 +12,6 @@ app.get('/api/:id', function(req,res,next) {
   db.findProject({projectId: req.params.id})
     .populate('posts')
     .exec((err, project) => res.send(project))
-
 });
 
 app.listen(3003);
