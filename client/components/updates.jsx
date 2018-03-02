@@ -21,8 +21,8 @@ class Updates extends React.Component {
       .then(res => res.json())
       .then(body => {
         this.setState({
-          posts: body[0].posts,
-          foundedDate: body[0].founded
+          posts: body.posts,
+          foundedDate: body.founded,
         })
     })
   }

@@ -1,17 +1,7 @@
 const fake = require('faker');
 const mongoose = require('mongoose');
 const moment = require('moment');
-mongoose.connect('mongodb://localhost/updates');
-
-
-const postSchema = mongoose.Schema({
-  projectId: Number,
-  posts: Array,
-  founded: String,
-});
-
-const post = mongoose.model('Post', postSchema);
-
+const database = require('../database/db.js');
 
 let fakeData = [];
 
@@ -44,12 +34,30 @@ for (let i=0; i < 200; i++) {
   fakeData.push(project)
 }
 
-fakeData.forEach(ele => {
-  const db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'connection error:'));
-  db.once('open', function () {
-    console.log('MONGO GOD');
+fakeData.forEach(Project => {
+  let projectId = new mongoose.Types.ObjectId();
+  let projectArray = [];
+    Project.posts.forEach(post => {
+      let idPost = new mongoose.Types.ObjectId();
+      projectArray.push(idPost);
+      database.insertPost({
+        _id: idPost,
+        project: projectId,
+        postId: post.postId,
+        article: post.article,
+        summary: post.summary,
+        date: post.date,
+        title: post.title,
+        likes: 10,
+        comments: ['Yay', 'It worked'],
+      })
+    });
+    database.insertProject({
+      _id: projectId,
+      projectId: Project.projectId,
+      founded: Project.founded,
+      posts: projectArray,
+    })
   });
-  let project = new post(ele);
-  project.save().then(() => db.close());
-});
+
+
