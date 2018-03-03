@@ -23,6 +23,7 @@ const postSchema = mongoose.Schema({
   title: String,
   likes: Number,
   comments: Array,
+  images: Array,
 });
 
 const Project = mongoose.model('Project', projectSchema);
@@ -49,9 +50,14 @@ const insertPost = post => {
     return Project.findOne(obj)
   };
 
+  const findPost = obj => {
+    return Post.findOne(obj)
+  }
+
   module.exports.insertProject = insertProject;
   module.exports.insertMany = insertMany;
   module.exports.findProject = findProject;
   module.exports.insertPost = insertPost;
+  module.exports.findPost = findPost;
 
 

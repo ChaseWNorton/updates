@@ -22,13 +22,20 @@ for (let i=0; i < 200; i++) {
       summary = article;
     }
     let upperCaseTitle = title.split(' ').map(ele => ele.charAt(0).toUpperCase() + ele.slice(1)).join(' ');
+    let numOfComments = Math.floor(Math.random() * 20);
+    let comments = [];
+    for (let i=0; i < numOfComments; i++) {
+      comments.push(fake.lorem.sentence())
+    }
     project.posts.push({
       postId: Number(`${i}${j}`),
       article: article,
       summary: summary,
       date: moment(fake.date.recent()).format("MMMM Do"),
       title: upperCaseTitle,
-      likes: 0
+      likes: Math.floor(Math.random() * 100),
+      images: [fake.image.imageUrl(), fake.image.imageUrl(), fake.image.imageUrl()],
+      comments: comments
     });
   }
   fakeData.push(project)
@@ -48,8 +55,9 @@ fakeData.forEach(Project => {
         summary: post.summary,
         date: post.date,
         title: post.title,
-        likes: 10,
-        comments: ['Yay', 'It worked'],
+        likes: post.likes,
+        comments: post.comments,
+        images: post.images
       })
     });
     database.insertProject({
