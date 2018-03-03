@@ -17,6 +17,7 @@ const postSchema = mongoose.Schema({
   _id : mongoose.Schema.Types.ObjectId,
   project: {type: mongoose.Schema.Types.ObjectId, ref: 'Project'},
   postId: Number,
+  postNum: Number,
   article: String,
   summary: String,
   date: String,

@@ -39,6 +39,7 @@ class Updates extends React.Component {
     fetch(`/blogs/${id}`)
       .then(res => res.json())
       .then(body => {
+        console.log(body);
         this.setState({
           display: 'blog',
           post: body

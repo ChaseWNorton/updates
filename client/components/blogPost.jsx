@@ -7,6 +7,7 @@ class BlogPost extends React.Component {
     super(props);
     this.state = {
       postId: this.props.post.postId,
+      postNum: this.props.post.postNum,
       projectId: this.props.post.project,
       article: this.props.post.article,
       date: this.props.post.date,
@@ -16,9 +17,12 @@ class BlogPost extends React.Component {
       comments: this.props.post.comments,
       images: this.props.post.images,
       hover: false,
-    }
+      hoverHeart: false,
+    };
     this.onHoverTipIn = this.onHoverTipIn.bind(this);
     this.onHoverTipOut = this.onHoverTipOut.bind(this);
+    this.onHoverHeartIn = this.onHoverHeartIn.bind(this);
+    this.onHoverHeartOut = this.onHoverHeartOut.bind(this);
   }
 
   onHoverTipIn() {
@@ -33,6 +37,18 @@ class BlogPost extends React.Component {
     })
   }
 
+  onHoverHeartIn() {
+    this.setState({
+      hoverHeart: true
+    })
+  }
+
+  onHoverHeartOut() {
+    this.setState({
+      hoverHeart: false
+    })
+  }
+
   render() {
     return(
       <div className="blog-post" style={styles.blogPost}>
@@ -43,7 +59,7 @@ class BlogPost extends React.Component {
               All backers will be notified
             </div>
             <div key={this.state.project} className="updateNum" style={styles.updateNum}>
-              <h5 className="updateNumber">Update #3</h5>
+              <h5 className="updateNumber">Update #{this.state.postNum}</h5>
               <FontAwesome onMouseEnter={this.onHoverTipIn} onMouseOut={this.onHoverTipOut} name='exclamation-circle' style={styles.exclamationSym}/>
             </div>
 
@@ -54,7 +70,16 @@ class BlogPost extends React.Component {
           <div className="header-title" style={styles.headerTitle}>
             <h1 style={{marginTop: '0'}}>{this.state.title}</h1>
           </div>
-          <div className="comment-like-box"></div>
+          <div className="comment-like-box" style={styles.commentLikeBox}>
+            <div className="comments">
+              <h5 style={styles.comments}>{this.state.comments.length} Comments</h5>
+            </div>
+            <div className="like-box" onMouseEnter={this.onHoverHeartIn} onMouseOut={this.onHoverHeartOut} style={styles.likeBox}>
+              <FontAwesome name='heart' style={this.state.hoverHeart ? styles.heartHovered : styles.heartNotHovered}/>
+              <h5 style={{zIndex: '1', position: 'relative'}}>Likes</h5>
+            </div>
+            <div className="like-count"></div>
+          </div>
         </header>
         <section className="blog-content">
           <div className="blog-article">
@@ -143,7 +168,46 @@ let styles = {
       ':hover': {
 
       }
-    }
+    },
+  commentLikeBox: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    maxWidth: '50%',
+    alignSelf: 'flex-start',
+    position: 'relative'
+  },
+    comments: {
+      padding: '15px 15px 15px 0'
+    },
+    likeBox: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      zIndex: '4',
+      position: 'relative'
+    },
+      heartHovered: {
+        fontSize: '20px',
+        color: 'red',
+        padding: '5px',
+        zIndex: '1',
+        position: 'relative',
+      },
+      heartNotHovered: {
+        fontSize: '16px',
+        color: '#282828',
+        padding: '5px',
+        zIndex: '1',
+        position: 'relative',
+      }
+
+
+
+
+
 };
 
 export default Radium(BlogPost);

@@ -11,8 +11,8 @@ for (let i=0; i < 200; i++) {
     posts: [],
     founded: `${moment(fake.date.past()).format("MMMM Do, YYYY")}`,
   };
-
-  for (let j=0; j< 4;j++ ) {
+  let randomCommentNum = Math.floor(Math.random() * 15);
+  for (let j=0; j < randomCommentNum ;j++ ) {
     const article = fake.lorem.paragraphs();
     const title = fake.lorem.words();
     let summary;
@@ -29,6 +29,7 @@ for (let i=0; i < 200; i++) {
     }
     project.posts.push({
       postId: Number(`${i}${j}`),
+      postNum: Number(`${j + 1}`),
       article: article,
       summary: summary,
       date: moment(fake.date.recent()).format("MMMM Do"),
@@ -51,6 +52,7 @@ fakeData.forEach(Project => {
         _id: idPost,
         project: projectId,
         postId: post.postId,
+        postNum: post.postNum,
         article: post.article,
         summary: post.summary,
         date: post.date,
