@@ -23,6 +23,7 @@ class BlogPost extends React.Component {
     this.onHoverTipOut = this.onHoverTipOut.bind(this);
     this.onHoverHeartIn = this.onHoverHeartIn.bind(this);
     this.onHoverHeartOut = this.onHoverHeartOut.bind(this);
+    this.clickOnLike = this.clickOnLike.bind(this);
   }
 
   onHoverTipIn() {
@@ -47,6 +48,26 @@ class BlogPost extends React.Component {
     this.setState({
       hoverHeart: false
     })
+  }
+
+  clickOnLike() {
+    this.setState( {
+        likes: this.state.likes + 1
+    }, () => {
+        try {
+          fetch(`/api/likePUT/${this.state.postId}`, {
+            body: JSON.stringify({likes: this.state.likes}),
+            headers: {
+              'content-type': 'application/json'
+            },
+            method: 'PUT'
+          })
+        }
+        catch (err) {
+          throw err;
+        }
+      }
+    )
   }
 
   render() {
@@ -75,11 +96,13 @@ class BlogPost extends React.Component {
               <h5 style={styles.comments}>{this.state.comments.length} Comments</h5>
             </div>
             <div className="like-box"  style={styles.likeBox}>
-              <div className="hover-div" style={styles.hoverDiv} onMouseEnter={this.onHoverHeartIn} onMouseOut={this.onHoverHeartOut}></div>
+              <div className="hover-div" onClick={this.clickOnLike} style={styles.hoverDiv} onMouseEnter={this.onHoverHeartIn} onMouseOut={this.onHoverHeartOut}></div>
                 <FontAwesome name='heart' style={this.state.hoverHeart ? styles.heartHovered : styles.heartNotHovered}/>
-                <h5 style={{zIndex: '1', position: 'relative'}}>Likes</h5>
+                <h5 style={{zIndex: '1', position: 'relative'}}>Like</h5>
             </div>
-            <div className="like-count"></div>
+            <div className="like-count">
+              <h5>{this.state.likes} Likes</h5>
+            </div>
           </div>
         </header>
         <section className="blog-content">
@@ -188,6 +211,7 @@ let styles = {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
+      padding: '0 15px 0 0'
     },
     hoverDiv: {
     display: 'flex',
@@ -196,6 +220,7 @@ let styles = {
     width: '100%',
     zIndex: 4,
     height: '1rem',
+    cursor: 'pointer',
     },
       heartHovered: {
         fontSize: '20px',

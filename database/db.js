@@ -53,12 +53,20 @@ const insertPost = post => {
 
   const findPost = obj => {
     return Post.findOne(obj)
-  }
+  };
+
+  const findPostAndUpdate = (query, update) => {
+    console.log(query);
+    console.log(update);
+    let input = {postId: query};
+    Post.findOneAndUpdate(input, {"set": update})
+  };
 
   module.exports.insertProject = insertProject;
   module.exports.insertMany = insertMany;
   module.exports.findProject = findProject;
   module.exports.insertPost = insertPost;
   module.exports.findPost = findPost;
+  module.exports.findPostAndUpdate = findPostAndUpdate;
 
 
