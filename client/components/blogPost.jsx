@@ -74,9 +74,10 @@ class BlogPost extends React.Component {
             <div className="comments">
               <h5 style={styles.comments}>{this.state.comments.length} Comments</h5>
             </div>
-            <div className="like-box" onMouseEnter={this.onHoverHeartIn} onMouseOut={this.onHoverHeartOut} style={styles.likeBox}>
-              <FontAwesome name='heart' style={this.state.hoverHeart ? styles.heartHovered : styles.heartNotHovered}/>
-              <h5 style={{zIndex: '1', position: 'relative'}}>Likes</h5>
+            <div className="like-box"  style={styles.likeBox}>
+              <div className="hover-div" style={styles.hoverDiv} onMouseEnter={this.onHoverHeartIn} onMouseOut={this.onHoverHeartOut}></div>
+                <FontAwesome name='heart' style={this.state.hoverHeart ? styles.heartHovered : styles.heartNotHovered}/>
+                <h5 style={{zIndex: '1', position: 'relative'}}>Likes</h5>
             </div>
             <div className="like-count"></div>
           </div>
@@ -183,25 +184,32 @@ let styles = {
     },
     likeBox: {
       display: 'flex',
+      position: 'relative',
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      zIndex: '4',
-      position: 'relative'
+    },
+    hoverDiv: {
+    display: 'flex',
+    position: 'absolute',
+    backgroundColor: '#ff000000',
+    width: '100%',
+    zIndex: 4,
+    height: '1rem',
     },
       heartHovered: {
         fontSize: '20px',
+        position: 'relative',
         color: 'red',
         padding: '5px',
-        zIndex: '1',
-        position: 'relative',
+        zIndex: 1,
       },
       heartNotHovered: {
         fontSize: '16px',
+        position: 'relative',
         color: '#282828',
         padding: '5px',
-        zIndex: '1',
-        position: 'relative',
+        zIndex: 1,
       }
 
 
