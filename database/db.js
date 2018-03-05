@@ -3,13 +3,13 @@ mongoose.connect('mongodb://localhost/updates');
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-  console.log('MONGO GOD');
+  console.log('MONGO GOD2');
 });
 
 const postSchema = mongoose.Schema({
   projectId: Number,
   posts: Array,
-  founded: Date,
+  founded: String,
 });
 
 const postModel = mongoose.model('Post', postSchema);
@@ -25,12 +25,12 @@ const insertOne = post => {
     })
   };
 
-  const findOne = obj => {
-    return postModel.findOne(obj);
+  const find = obj => {
+    return postModel.find(obj);
   }
 
   module.exports.insertOne = insertOne;
   module.exports.insertMany = insertMany;
-  module.exports.findOne = findOne;
+  module.exports.find = find;
 
 

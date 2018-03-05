@@ -1,45 +1,50 @@
 import React from 'react';
-import Radium from 'radium';
 import TimelineLeft from './timelineLeft.jsx';
 import TimelineRight from './timelineRight.jsx';
 import Founded from './timelineFounded.jsx';
 
 
-@Radium
 class Updates extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       id: this.props.ID,
       posts: [],
-      foundedDate:  'January 15th 2018',
+      foundedDate:  '',
+      color: ['#96C7FF', '#FFCBA9', '#05F2BA'],
     };
+    this.timelineClick = this.timelineClick.bind(this);
   }
 
   componentWillMount() {
     fetch(`/api/${this.state.id}`)
       .then(res => res.json())
       .then(body => {
-        console.log(body);
         this.setState({
-          posts: body.posts,
-          foundedDate: body.founded
+          posts: body[0].posts,
+          foundedDate: body[0].founded
         })
       })
   }
 
+  randomColor() {
+    return this.state.color[Math.floor(Math.random() * 3)];
+  }
+
+  timelineClick () {
+    alert('HEY!')
+  }
 
   render() {
     return(
       <div className="update-container">
         {this.state.posts.map(ele => {
             if (ele.postId % 2 === 0) {
-              return <TimelineLeft key={ele.postId} title={ele.title} date={ele.date} blog={ele.article} />;
+              return <TimelineLeft key={ele.postId} onClick={this.timelineClick} background={this.randomColor()} title={ele.title} date={ele.date} blog={ele.summary} />;
             } else {
-              return <TimelineRight key={ele.postId} title={ele.title} date={ele.date} blog={ele.article} />;
+              return <TimelineRight key={ele.postId} onClick={this.timelineClick} background={this.randomColor()} title={ele.title} date={ele.date} blog={ele.summary} />;
             }
         })}
-        <div>{this.state.test}</div>
           <Founded foundedDate={this.state.foundedDate} />
       </div>
     )
