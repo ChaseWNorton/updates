@@ -169,9 +169,13 @@ class BlogPost extends React.Component {
             <FontAwesome style={{paddingLeft: '5px'}} name='angle-right'></FontAwesome>
           </div>
         </div>
-        <div className="like-section">
-          <div className="like-button"></div>
-          <div className="liked-by"></div>
+        <div className="like-section" style={styles.likeSection}>
+          <div className="like-button" style={[styles.flexRow]}>
+            <div className="hover-div" onClick={this.clickOnLike} style={styles.hoverDiv} onMouseEnter={this.onHoverHeartIn} onMouseOut={this.onHoverHeartOut}></div>
+            <FontAwesome name='heart' style={this.state.hoverHeart ? styles.heartHovered : styles.heartNotHovered}></FontAwesome>
+            <h5 style={{zIndex: '1', position: 'relative'}}>Like</h5>
+          </div>
+            <div className="liked-by"></div>
         </div>
         <div className="comment-section">
           <div className="comments-title"></div>
@@ -336,7 +340,21 @@ let styles = {
       backgroundColor: 'whitesmoke',
       padding: '5px 35px 5px 35px',
       cursor: 'pointer',
-    }
+    },
+  likeSection: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      width: '70%',
+      borderTop: '1px dotted linen',
+      borderBottom: '1px dotted linen',
+      padding: '16px',
+  },
+  flexRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  }
 
 
 
