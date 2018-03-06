@@ -36,7 +36,7 @@ for (let i=0; i < 200; i++) {
       date: moment(fake.date.recent()).format("MMMM Do"),
       title: upperCaseTitle,
       likes: Math.floor(Math.random() * 100),
-      images: [fake.image.imageUrl(), fake.image.imageUrl(), fake.image.imageUrl()],
+      images: [`${fake.image.imageUrl()}?random=${Date.now()* Math.random()}`, `${fake.image.imageUrl()}?random=${Date.now() * Math.random()}`, `${fake.image.imageUrl()}?random=${Date.now()* Math.random()}`],
       comments: comments
     });
     project.totalPosts++;
