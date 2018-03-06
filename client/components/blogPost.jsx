@@ -8,6 +8,7 @@ class BlogPost extends React.Component {
     this.state = {
       postId: this.props.post.postId,
       postNum: this.props.post.postNum,
+      totalNumOfPost: this.props.numOfPosts,
       projectId: this.props.post.project,
       article: this.props.post.article,
       date: this.props.post.date,
@@ -73,11 +74,41 @@ class BlogPost extends React.Component {
   }
 
   prevClick() {
-    alert('hi')
+    let id = this.state.postId - 1
+    fetch(`/blogs/${id}`)
+      .then(res => res.json())
+      .then(body => {
+          this.setState({
+            postId: body.postId,
+            postNum: body.postNum,
+            article: body.article,
+            date: body.date,
+            title: body.title,
+            summary: body.summary,
+            likes: body.likes,
+            comments: body.comments,
+            images: body.images,
+          })
+      })
   }
 
   nextClick() {
-    alert('next')
+    let id = this.state.postId + 1
+    fetch(`/blogs/${id}`)
+      .then(res => res.json())
+      .then(body => {
+        this.setState({
+          postId: body.postId,
+          postNum: body.postNum,
+          article: body.article,
+          date: body.date,
+          title: body.title,
+          summary: body.summary,
+          likes: body.likes,
+          comments: body.comments,
+          images: body.images,
+        })
+      })
   }
 
   render() {
@@ -129,11 +160,11 @@ class BlogPost extends React.Component {
           </div>
         </section>
         <div className="nav-buttons" style={styles.navButtons}>
-          <div className="prev-button" onClick={this.prevClick} style={styles.prevButton}>
+          <div className="prev-button" onClick={this.prevClick} style={this.state.postNum === 1 ? {display: 'none'} : styles.prevButton}>
             <FontAwesome style={{paddingRight: '5px'}} name='angle-left'></FontAwesome>
             <h5 style={{marginTop: '5px', marginBottom: '5px'}}>Previous update</h5>
           </div>
-          <div className="forward-button" onClick={this.nextClick} style={styles.prevButton}>
+          <div className="forward-button" onClick={this.nextClick} style={this.state.postNum === this.state.totalNumOfPost ? {display: 'none'} : styles.prevButton}>
             <h5 style={{marginTop: '5px', marginBottom: '5px'}}>Next update</h5>
             <FontAwesome style={{paddingLeft: '5px'}} name='angle-right'></FontAwesome>
           </div>
@@ -301,6 +332,7 @@ let styles = {
       alignItems: 'center',
       fontSize: '20px',
       width: '25%',
+      minWidth: '145px',
       backgroundColor: 'whitesmoke',
       padding: '5px 35px 5px 35px',
       cursor: 'pointer',
