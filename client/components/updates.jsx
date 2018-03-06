@@ -14,8 +14,8 @@ class Updates extends React.Component {
       foundedDate:  '',
       color: ['#96C7FF', '#FFCBA9', '#05F2BA'],
       post: {},
-      display: 'home'
-
+      display: 'home',
+      numOfPosts: 0,
     };
     this.timelineClick = this.timelineClick.bind(this);
   }
@@ -27,6 +27,7 @@ class Updates extends React.Component {
         this.setState({
           posts: body.posts,
           foundedDate: body.founded,
+          numOfPosts: body.totalPosts,
         })
     })
   }
@@ -80,7 +81,7 @@ class Updates extends React.Component {
           <Founded foundedDate={this.state.foundedDate} />
       </div>
       :
-        <BlogPost post={this.state.post} />
+        <BlogPost numOfPosts={this.state.numOfPosts} post={this.state.post} />
     )
   }
 }

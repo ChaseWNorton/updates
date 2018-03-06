@@ -9,6 +9,7 @@ db.once('open', function () {
 const projectSchema =  mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   projectId: Number,
+  totalPosts: Number,
   founded: String,
   posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
 });
@@ -56,10 +57,8 @@ const insertPost = post => {
   };
 
   const findPostAndUpdate = (query, update) => {
-    console.log(query);
-    console.log(update);
     let input = {postId: query};
-    Post.findOneAndUpdate(input, {"set": update})
+    Post.findOneAndUpdate(input, {$set: {likes: update.likes}}, (thing) => console.log(thing))
   };
 
   module.exports.insertProject = insertProject;

@@ -24,6 +24,8 @@ class BlogPost extends React.Component {
     this.onHoverHeartIn = this.onHoverHeartIn.bind(this);
     this.onHoverHeartOut = this.onHoverHeartOut.bind(this);
     this.clickOnLike = this.clickOnLike.bind(this);
+    this.prevClick = this.prevClick.bind(this);
+    this.nextClick = this.nextClick.bind(this);
   }
 
   onHoverTipIn() {
@@ -70,6 +72,14 @@ class BlogPost extends React.Component {
     )
   }
 
+  prevClick() {
+    alert('hi')
+  }
+
+  nextClick() {
+    alert('next')
+  }
+
   render() {
     return(
       <div className="blog-post" style={styles.blogPost}>
@@ -105,17 +115,28 @@ class BlogPost extends React.Component {
             </div>
           </div>
         </header>
-        <section className="blog-content">
-          <div className="blog-article">
+        <section className="blog-content" style={styles.blogContent}>
+          <div className="blog-article" style={styles.blogArticle}>
             <div className="image-section">
-              <div className="top-image">{<img src={this.state.images[0]}></img>}</div>
+              <div className="top-image" >{<img style={styles.topImage} src={this.state.images[0]}></img>}</div>
+            </div>
+            {this.state.article}
+            <div className="bottom-images" style={styles.bottomImages}>
+              <img src={this.state.images[1]} style={{width: '45%', paddingRight: '5px'}}></img>
+              <img src={this.state.images[2]} style={{width: '45%', paddingLeft: '5px'}}></img>
             </div>
             {this.state.article}
           </div>
         </section>
-        <div className="nav-buttons">
-          <div className="prev-button"></div>
-          <div className="forward-button"></div>
+        <div className="nav-buttons" style={styles.navButtons}>
+          <div className="prev-button" onClick={this.prevClick} style={styles.prevButton}>
+            <FontAwesome style={{paddingRight: '5px'}} name='angle-left'></FontAwesome>
+            <h5 style={{marginTop: '5px', marginBottom: '5px'}}>Previous update</h5>
+          </div>
+          <div className="forward-button" onClick={this.nextClick} style={styles.prevButton}>
+            <h5 style={{marginTop: '5px', marginBottom: '5px'}}>Next update</h5>
+            <FontAwesome style={{paddingLeft: '5px'}} name='angle-right'></FontAwesome>
+          </div>
         </div>
         <div className="like-section">
           <div className="like-button"></div>
@@ -146,7 +167,7 @@ let styles = {
     justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '100%',
-    padding: '15px',
+    padding: '15px 15px 0 15px',
   },
     headerTopbar: {
       display: 'flex',
@@ -235,7 +256,56 @@ let styles = {
         color: '#282828',
         padding: '5px',
         zIndex: 1,
-      }
+      },
+  blogContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+  },
+    blogArticle: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'space-evenly',
+      textAlign: 'justify',
+    },
+      topImage: {
+        width: '100%',
+        padding: '0 0 15px 0',
+      },
+    bottomImages: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingBottom: '25px',
+      paddingTop: '25px',
+    },
+      bottomImage: {
+        width: '50%',
+      },
+
+  navButtons: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    paddingTop: '45px',
+  },
+    prevButton: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize: '20px',
+      width: '25%',
+      backgroundColor: 'whitesmoke',
+      padding: '5px 35px 5px 35px',
+      cursor: 'pointer',
+    }
+
 
 
 

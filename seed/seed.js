@@ -8,6 +8,7 @@ let fakeData = [];
 for (let i=0; i < 200; i++) {
   let project = {
     projectId: i,
+    totalPosts: 0,
     posts: [],
     founded: `${moment(fake.date.past()).format("MMMM Do, YYYY")}`,
   };
@@ -38,6 +39,7 @@ for (let i=0; i < 200; i++) {
       images: [fake.image.imageUrl(), fake.image.imageUrl(), fake.image.imageUrl()],
       comments: comments
     });
+    project.totalPosts++;
   }
   fakeData.push(project)
 }
@@ -66,7 +68,9 @@ fakeData.forEach(Project => {
       _id: projectId,
       projectId: Project.projectId,
       founded: Project.founded,
+      totalPosts: Project.totalPosts,
       posts: projectArray,
+
     })
   });
 
