@@ -1,6 +1,6 @@
 {
   "presets": [
-    "react","env"
+    "react","env","stage-2"
   ],
   "plugins": ["syntax-decorators", "transform-decorators-legacy"]
 }

@@ -1,26 +1,19 @@
 const fake = require('faker');
 const mongoose = require('mongoose');
 const moment = require('moment');
-mongoose.connect('mongodb://localhost/updates');
-
-
-const postSchema = mongoose.Schema({
-  projectId: Number,
-  posts: Array,
-  founded: String,
-});
-
-const post = mongoose.model('Post', postSchema);
-
+const database = require('../database/db.js');
 
 let fakeData = [];
+
 for (let i=0; i < 200; i++) {
   let project = {
     projectId: i,
+    totalPosts: 0,
     posts: [],
     founded: `${moment(fake.date.past()).format("MMMM Do, YYYY")}`,
   };
-  for (let j=0; j< 4;j++ ) {
+  let randomCommentNum = Math.floor(Math.random() * 15);
+  for (let j=0; j < randomCommentNum ;j++ ) {
     const article = fake.lorem.paragraphs();
     const title = fake.lorem.words();
     let summary;
@@ -30,23 +23,55 @@ for (let i=0; i < 200; i++) {
       summary = article;
     }
     let upperCaseTitle = title.split(' ').map(ele => ele.charAt(0).toUpperCase() + ele.slice(1)).join(' ');
+    let numOfComments = Math.floor(Math.random() * 20);
+    let comments = [];
+    for (let i=0; i < numOfComments; i++) {
+      comments.push(fake.lorem.sentence())
+    }
     project.posts.push({
       postId: Number(`${i}${j}`),
+      postNum: Number(`${j + 1}`),
       article: article,
       summary: summary,
       date: moment(fake.date.recent()).format("MMMM Do"),
       title: upperCaseTitle,
+      likes: Math.floor(Math.random() * 100),
+      images: [fake.image.imageUrl(), fake.image.imageUrl(), fake.image.imageUrl()],
+      comments: comments
     });
+    project.totalPosts++;
   }
   fakeData.push(project)
 }
 
-fakeData.forEach(ele => {
-  const db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'connection error:'));
-  db.once('open', function () {
-    console.log('MONGO GOD');
+fakeData.forEach(Project => {
+  let projectId = new mongoose.Types.ObjectId();
+  let projectArray = [];
+    Project.posts.forEach(post => {
+      let idPost = new mongoose.Types.ObjectId();
+      projectArray.push(idPost);
+      database.insertPost({
+        _id: idPost,
+        project: projectId,
+        postId: post.postId,
+        postNum: post.postNum,
+        article: post.article,
+        summary: post.summary,
+        date: post.date,
+        title: post.title,
+        likes: post.likes,
+        comments: post.comments,
+        images: post.images
+      })
+    });
+    database.insertProject({
+      _id: projectId,
+      projectId: Project.projectId,
+      founded: Project.founded,
+      totalPosts: Project.totalPosts,
+      posts: projectArray,
+
+    })
   });
-  let project = new post(ele);
-  project.save().then(() => db.close());
-});
+
+
