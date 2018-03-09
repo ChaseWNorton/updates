@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const db = require('../database/db.js');
 const parser = require('body-parser');
 const path = require('path');
@@ -25,5 +26,5 @@ app.put(`/api/likePUT/:id`, function(req,res,next) {
   res.sendStatus(204);
 });
 
-app.listen(3003);
-console.log('Listening on port 3003');
+app.listen(process.env.HOST, process.env.PORT);
+console.log(`Listening at ${process.env.HOST} on port ${process.env.PORT}`);
