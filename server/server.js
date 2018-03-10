@@ -7,8 +7,8 @@ const path = require('path');
 const app = express();
 app.use(parser.json());
 
-app.use(express.static('../dist'));
-app.use('/:id', express.static('../dist'));
+app.use(express.static(path.join(__dirname, '../dist')));
+app.use('/:id', express.static(path.join(__dirname, '../dist')));
 
 app.get(`/blogs/:id`, function(req, res, next) {
   db.findPost({postId: req.params.id})
@@ -26,5 +26,5 @@ app.put(`/api/likePUT/:id`, function(req,res,next) {
   res.sendStatus(204);
 });
 
-app.listen(process.env.HOST, process.env.PORT);
+app.listen(process.env.PORT, process.env.HOST);
 console.log(`Listening at ${process.env.HOST} on port ${process.env.PORT}`);

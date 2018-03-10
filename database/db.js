@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-mongoose.connect(`mongodb://${process.env.HOST}:${process.env.PORT}/updates`);
+console.log(`mongodb://${process.env.HOST}:${process.env.DB_PORT}/updates`)
+mongoose.connect(`mongodb://${process.env.HOST}:${process.env.DB_PORT}/updates`);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
