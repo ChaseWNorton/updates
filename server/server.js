@@ -4,13 +4,14 @@ const parser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 
-
 const app = express();
 app.use(cors());
 app.use(parser.json());
 
-app.use(express.static('../dist'));
-app.use('/:id', express.static('../dist'));
+const distPath = path.join(__dirname, '../dist');
+
+app.use(express.static(distPath));
+app.use('/:id', express.static(distPath));
 
 app.get(`/blogs/:id`, function(req, res, next) {
   db.findPost({postId: req.params.id})
@@ -30,4 +31,3 @@ app.put(`/api/likePUT/:id`, function(req,res,next) {
 
 app.listen(3003);
 console.log('Listening on port 3003');
-

@@ -7,7 +7,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "seed": "node ./seed.js",
+    "seed": "node ./seed/seed.js",
     "react-dev": "webpack -w",
     "server-dev": "nodemon ./server/server.js"
   },

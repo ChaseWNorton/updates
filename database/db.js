@@ -3,7 +3,7 @@ mongoose.connect('mongodb://localhost/updates');
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-  console.log('MONGO GOD2');
+  console.log('Database Connection Open');
 });
 
 const projectSchema =  mongoose.Schema({
